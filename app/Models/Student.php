@@ -34,6 +34,12 @@ class Student extends Model
 
     protected $casts = [
         'tanggal_lahir' => 'date',
+        'nik'       => 'encrypted',
+        'nisn'      => 'encrypted',
+        'alamat'    => 'encrypted',
+        'nama_ayah' => 'encrypted',
+        'nama_ibu'  => 'encrypted',
+        'no_hp'     => 'encrypted',
     ];
 
     /*
