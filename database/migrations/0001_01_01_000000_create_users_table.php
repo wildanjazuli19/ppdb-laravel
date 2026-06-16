@@ -21,8 +21,8 @@ return new class extends Migration
 
             $table->enum('role', [
                 'admin',
-                'siswa'
-            ])->default('siswa');
+                'student'
+            ])->default('student');
 
             $table->timestamp('email_verified_at')->nullable();
 

@@ -52,17 +52,6 @@ Route::middleware('auth')->group(function () {
     ])->name('profile.destroy');
 });
 
-// Route::middleware([
-//     'auth',
-//     'admin'
-// ])->group(function () {
-
-//     Route::get('/admin/dashboard', [
-//         AdminDashboard::class,
-//         'index'
-//     ])->name('admin.dashboard');
-// });
-
 Route::middleware(['auth', 'admin'])
     ->prefix('admin')
     ->as('admin.')
@@ -119,6 +108,22 @@ Route::middleware(['auth', 'admin'])
             ReportController::class,
             'index'
         ])->name('reports.index');
+    });
+
+
+Route::middleware(['auth', 'student'])
+    ->prefix('student')
+    ->as('student.')
+    ->group(function () {
+        Route::get('/dashboard', [
+            StudentDashboard::class,
+            'index'
+        ])->name('dashboard');
+
+        Route::get('/registration', [
+            StudentDashboard::class,
+            'index'
+        ])->name('registration');
     });
 
 Route::get(
