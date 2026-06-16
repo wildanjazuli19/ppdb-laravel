@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AnnouncementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Student\DocumentController;
@@ -107,6 +108,11 @@ Route::middleware(['auth', 'admin'])
             PrestasiController::class,
             'process'
         ])->name('prestasi.process');
+
+        Route::resource(
+            'announcements',
+            AnnouncementController::class
+        )->names('announcements');
     });
 
 Route::get(

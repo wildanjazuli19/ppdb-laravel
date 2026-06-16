@@ -77,7 +77,7 @@
                     🏆 Seleksi Prestasi
                 </a>
 
-                <a href="#"
+                <a href="{{ route('admin.announcements.index') }}"
                     class="sidebar-link block px-6 py-3 hover:bg-slate-800">
                     📢 Pengumuman
                 </a>
