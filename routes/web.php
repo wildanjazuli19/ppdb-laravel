@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Student\DocumentController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboard;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,8 +21,9 @@ Route::middleware('auth')->group(function () {
         }
 
         return redirect()->route('student.dashboard');
-
     })->name('dashboard');
+
+    Route::resource('students', StudentController::class);
 
     Route::get('/student/dashboard', [
         StudentDashboard::class,
@@ -42,28 +45,40 @@ Route::middleware('auth')->group(function () {
         ProfileController::class,
         'destroy'
     ])->name('profile.destroy');
-
 });
 
-Route::middleware([
-    'auth',
-    'admin'
-])->group(function () {
+// Route::middleware([
+//     'auth',
+//     'admin'
+// ])->group(function () {
 
-    Route::get('/admin/dashboard', [
-        AdminDashboard::class,
-        'index'
-    ])->name('admin.dashboard');
+//     Route::get('/admin/dashboard', [
+//         AdminDashboard::class,
+//         'index'
+//     ])->name('admin.dashboard');
+// });
 
-});
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->as('admin.')
+    ->group(function () {
+
+        Route::get('/dashboard', [
+            AdminDashboard::class,
+            'index'
+        ])->name('dashboard');
+
+        Route::resource('students', StudentController::class);
+    });
+
 Route::get(
     '/student/documents',
-    [DocumentController::class,'create']
+    [DocumentController::class, 'create']
 )->name('student.documents');
 
 Route::post(
     '/student/documents',
-    [DocumentController::class,'store']
+    [DocumentController::class, 'store']
 )->name('student.documents.store');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

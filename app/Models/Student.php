@@ -9,33 +9,22 @@ class Student extends Model
     protected $fillable = [
 
         'nomor_pendaftaran',
-
         'user_id',
-
         'nik',
         'nisn',
-
         'nama_lengkap',
-
         'tempat_lahir',
         'tanggal_lahir',
-
+        'jenis_kelamin',
         'alamat',
-
         'nama_ayah',
         'nama_ibu',
-
-        'nomor_hp',
-
+        'no_hp',
         'asal_sekolah',
-
         'jalur',
-
         'status',
-
         'latitude',
         'longitude'
-
     ];
 
     protected $casts = [
