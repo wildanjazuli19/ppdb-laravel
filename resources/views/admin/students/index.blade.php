@@ -73,11 +73,6 @@
 
                         <div class="flex items-center justify-center gap-2">
 
-                            <a href="{{ route('admin.students.show', $student) }}"
-                                class="bg-sky-600 hover:bg-sky-700 px-3 py-2 rounded-lg text-sm transition">
-                                Detail
-                            </a>
-
                             <a href="{{ route('admin.students.edit', $student) }}"
                                 class="bg-yellow-500 hover:bg-yellow-600 px-3 py-2 rounded-lg text-sm transition">
                                 Edit
