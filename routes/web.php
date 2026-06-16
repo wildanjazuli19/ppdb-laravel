@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ZonasiController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboard;
-
+use App\Http\Controllers\Student\RegistrationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -121,9 +121,14 @@ Route::middleware(['auth', 'student'])
         ])->name('dashboard');
 
         Route::get('/registration', [
-            StudentDashboard::class,
+            RegistrationController::class,
             'index'
         ])->name('registration');
+
+        Route::post('/registration', [
+            RegistrationController::class,
+            'store'
+        ])->name('registration.store');
 
         Route::get('/documents', [
             StudentDashboard::class,
