@@ -9,6 +9,6 @@ class DashboardController extends Controller
     public function index()
     {
         // dd(auth()->user());
-        return view('student.dashboard');
+        return view('student.registration');
     }
 }
