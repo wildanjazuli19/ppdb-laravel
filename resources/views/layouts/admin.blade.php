@@ -62,7 +62,7 @@
                     👨‍🎓 Data Siswa
                 </a>
 
-                <a href="#"
+                <a href="{{ route('admin.document-verifications.index') }}"
                     class="sidebar-link block px-6 py-3 hover:bg-slate-800">
                     📄 Verifikasi Dokumen
                 </a>

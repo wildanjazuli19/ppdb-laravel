@@ -24,7 +24,8 @@ class Student extends Model
         'jalur',
         'status',
         'latitude',
-        'longitude'
+        'longitude',
+        'status_verifikasi'
     ];
 
     protected $casts = [

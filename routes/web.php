@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Student\DocumentController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
+use App\Http\Controllers\Admin\DocumentVerificationController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboard;
 
@@ -69,6 +70,21 @@ Route::middleware(['auth', 'admin'])
         ])->name('dashboard');
 
         Route::resource('students', StudentController::class);
+
+        Route::get('/document-verifications', [
+            DocumentVerificationController::class,
+            'index'
+        ])->name('document-verifications.index');
+
+        Route::get('/document-verifications/{student}', [
+            DocumentVerificationController::class,
+            'show'
+        ])->name('document-verifications.show');
+
+        Route::patch('/document-verifications/{student}', [
+            DocumentVerificationController::class,
+            'update'
+        ])->name('document-verifications.update');
     });
 
 Route::get(
