@@ -47,4 +47,9 @@ class Student extends Model
     {
         return $this->hasMany(Document::class);
     }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 }

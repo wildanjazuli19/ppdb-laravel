@@ -13,4 +13,9 @@ class School extends Model
         'longitude',
         'kuota'
     ];
+
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
 }
