@@ -37,7 +37,6 @@
                     <th class="px-6 py-4 text-left">No. Pendaftaran</th>
                     <th class="px-6 py-4 text-left">Nama Lengkap</th>
                     <th class="px-6 py-4 text-left">Tanggal Lahir</th>
-                    <th class="px-6 py-4 text-left">Alamat</th>
                     <th class="px-6 py-4 text-center">Aksi</th>
                 </tr>
 
@@ -63,10 +62,6 @@
 
                     <td class="px-6 py-4">
                         {{ \Carbon\Carbon::parse($student->tanggal_lahir)->format('d M Y') }}
-                    </td>
-
-                    <td class="px-6 py-4 max-w-xs truncate">
-                        {{ $student->alamat }}
                     </td>
 
                     <td class="px-6 py-4">
