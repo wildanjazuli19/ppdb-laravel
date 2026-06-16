@@ -25,7 +25,11 @@ class Student extends Model
         'status',
         'latitude',
         'longitude',
-        'status_verifikasi'
+        'status_verifikasi',
+        'nilai_rapor',
+        'poin_sertifikat',
+        'nilai_prestasi',
+        'status_seleksi'
     ];
 
     protected $casts = [

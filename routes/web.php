@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Student\DocumentController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\DocumentVerificationController;
+use App\Http\Controllers\Admin\PrestasiController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ZonasiController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboard;
@@ -96,6 +97,16 @@ Route::middleware(['auth', 'admin'])
             ZonasiController::class,
             'process'
         ])->name('zonasi.process');
+
+        Route::get('/prestasi', [
+            PrestasiController::class,
+            'index'
+        ])->name('prestasi.index');
+
+        Route::post('/prestasi/process', [
+            PrestasiController::class,
+            'process'
+        ])->name('prestasi.process');
     });
 
 Route::get(
