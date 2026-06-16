@@ -124,6 +124,11 @@ Route::middleware(['auth', 'student'])
             StudentDashboard::class,
             'index'
         ])->name('registration');
+
+        Route::get('/documents', [
+            StudentDashboard::class,
+            'index'
+        ])->name('documents');
     });
 
 Route::get(
