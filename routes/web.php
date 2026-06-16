@@ -7,6 +7,7 @@ use App\Http\Controllers\Student\DocumentController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\DocumentVerificationController;
 use App\Http\Controllers\Admin\PrestasiController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ZonasiController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboard;
@@ -113,6 +114,11 @@ Route::middleware(['auth', 'admin'])
             'announcements',
             AnnouncementController::class
         )->names('announcements');
+
+        Route::get('/reports', [
+            ReportController::class,
+            'index'
+        ])->name('reports.index');
     });
 
 Route::get(

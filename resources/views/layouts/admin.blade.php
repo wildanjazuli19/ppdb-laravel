@@ -82,7 +82,7 @@
                     📢 Pengumuman
                 </a>
 
-                <a href="#"
+                <a href="{{ route('admin.reports.index') }}"
                     class="sidebar-link block px-6 py-3 hover:bg-slate-800">
                     📈 Laporan
                 </a>
