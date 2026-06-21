@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Certificate;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -43,5 +44,21 @@ class DocumentVerificationController extends Controller
         return redirect()
             ->route('admin.document-verifications.index')
             ->with('success', 'Verifikasi berhasil diperbarui.');
+    }
+
+
+    public function verifyCertificate(Request $request, Certificate $certificate)
+    {
+        $validated = $request->validate([
+            'status_verifikasi' => ['required', 'in:pending,verified,rejected'],
+            'poin' => ['nullable', 'integer', 'min:0'],
+        ]);
+
+        $certificate->update([
+            'status_verifikasi' => $validated['status_verifikasi'],
+            'poin' => $validated['poin'] ?? 0,
+        ]);
+
+        return back()->with('success', 'Verifikasi sertifikat berhasil disimpan.');
     }
 }

@@ -109,6 +109,9 @@ Route::middleware(['auth', 'admin'])
             ReportController::class,
             'index'
         ])->name('reports.index');
+
+        Route::patch('/certificates/{certificate}/verify', [DocumentVerificationController::class, 'verifyCertificate'])
+            ->name('certificates.verify');
     });
 
 
