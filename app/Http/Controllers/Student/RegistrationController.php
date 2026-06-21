@@ -18,11 +18,13 @@ class RegistrationController extends Controller
 
     public function create()
     {
-        return view('student.registration');
+        $action = route('student.registration.store');
+        return view('student.registration', compact('action'));
     }
 
     public function store(Request $request)
     {
+        dd($request->all());
         $request->validate([
             'nama_lengkap' => 'required',
             'nik' => 'required',
