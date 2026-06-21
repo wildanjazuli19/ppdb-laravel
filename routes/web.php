@@ -136,19 +136,24 @@ Route::middleware(['auth', 'student'])
         ])->name('registration.update');
 
         Route::get('/documents', [
-            StudentDashboard::class,
+            DocumentController::class,
             'index'
         ])->name('documents');
+
+        Route::post('/documents', [
+            DocumentController::class,
+            'store'
+        ])->name('documents.store');
     });
 
-Route::get(
-    '/student/documents',
-    [DocumentController::class, 'create']
-)->name('student.documents');
+// Route::get(
+//     '/student/documents',
+//     [DocumentController::class, 'create']
+// )->name('student.documents');
 
-Route::post(
-    '/student/documents',
-    [DocumentController::class, 'store']
-)->name('student.documents.store');
+// Route::post(
+//     '/student/documents',
+//     [DocumentController::class, 'store']
+// )->name('student.documents.store');
 
 require __DIR__ . '/auth.php';
