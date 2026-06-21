@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Student;
 
 use App\Services\AesEncryptionService;
 use App\Http\Controllers\Controller;
+use App\Models\School;
 use App\Models\Student;
+use App\Services\DistanceService;
 use App\Services\RegistrationNumberService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,10 +28,10 @@ class RegistrationController extends Controller
         return view('student.registration', compact('action', 'method', 'student'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, DistanceService $distanceService)
     {
         // dd($request->all());
-        $request->validate([
+        $data = $request->validate([
             'nama_lengkap' => 'required',
             'nik' => 'required',
             'nisn' => 'required',
@@ -44,39 +46,28 @@ class RegistrationController extends Controller
             'jenis_kelamin' => 'required',
         ]);
 
-        Student::create([
+        if ($request->jalur === 'zonasi') {
+            $data['school_id'] = 1;
+            $school = School::findOrFail(1);
+            $jarak = $distanceService->calculateKm(
+                $request->latitude,
+                $request->longitude,
+                $school->latitude,
+                $school->longitude
+            );
+            // dd($jarak);
+            $data['jarak_zonasi'] = $jarak;
+            $data['latitude'] = $request->latitude;
+            $data['longitude'] = $request->longitude;
+        }
 
-            'nomor_pendaftaran' =>
-            $request->nomor_pendaftaran,
+        $data['user_id'] = auth()->id();
+        $data['nomor_pendaftaran'] = $request->nomor_pendaftaran;
+        $data['status'] = 'pending';
+        $data['school_id'] = $data['jalur'] === 'zonasi' ? 1 : null;
 
-            'user_id' => auth()->id(),
+        Student::create($data);
 
-            'nik' => $request->nik,
-
-            'nisn' => $request->nisn,
-
-            'nama_lengkap' => $request->nama_lengkap,
-
-            'tempat_lahir' => $request->tempat_lahir,
-
-            'tanggal_lahir' => $request->tanggal_lahir,
-
-            'alamat' => $request->alamat,
-
-            'nama_ayah' => $request->nama_ayah,
-
-            'nama_ibu' => $request->nama_ibu,
-
-            'no_hp' => $request->no_hp,
-
-            'asal_sekolah' => $request->asal_sekolah,
-
-            'jalur' => $request->jalur,
-
-            'status' => 'pending',
-            'jenis_kelamin' => $request->jenis_kelamin,
-
-        ]);
         return redirect()
             ->route('student.registration')
             ->with('success', 'Data berhasil disimpan');
@@ -105,7 +96,7 @@ class RegistrationController extends Controller
         $student->update($validated);
 
         return redirect()
-            ->route('student.registration.index')
+            ->route('student.registration')
             ->with('success', 'Data pendaftaran berhasil diperbarui.');
     }
 }

@@ -29,7 +29,11 @@ class Student extends Model
         'nilai_rapor',
         'poin_sertifikat',
         'nilai_prestasi',
-        'status_seleksi'
+        'status_seleksi',
+        'school_id',
+        'jarak_zonasi',
+        'latitude',
+        'longitude',
     ];
 
     protected $casts = [

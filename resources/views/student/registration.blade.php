@@ -309,6 +309,12 @@
                 </p>
                 @enderror
             </div>
+            <input type="hidden" name="latitude" id="latitude">
+            <input type="hidden" name="longitude" id="longitude">
+
+            <button type="button" id="getLocation" class="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 transition">
+                Ambil Lokasi Saat Ini
+            </button>
             <h4 class="text-lg font-semibold border-b border-slate-700 pb-3 mt-8">
                 Data Orang Tua
             </h4>
@@ -381,3 +387,27 @@
 
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.getElementById('getLocation').addEventListener('click', function() {
+
+        if (!navigator.geolocation) {
+            alert('Browser tidak mendukung geolokasi');
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                document.getElementById('latitude').value = position.coords.latitude;
+                document.getElementById('longitude').value = position.coords.longitude;
+
+                alert('Lokasi berhasil diambil');
+            },
+            function(error) {
+                alert('Gagal mengambil lokasi: ' + error.message);
+            }
+        );
+    });
+</script>
+@endpush
