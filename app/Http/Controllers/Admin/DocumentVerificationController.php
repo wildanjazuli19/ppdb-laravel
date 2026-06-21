@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Certificate;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DocumentVerificationController extends Controller
 {
@@ -47,6 +48,21 @@ class DocumentVerificationController extends Controller
     }
 
 
+    // public function verifyCertificate(Request $request, Certificate $certificate)
+    // {
+    //     $validated = $request->validate([
+    //         'status_verifikasi' => ['required', 'in:pending,verified,rejected'],
+    //         'poin' => ['nullable', 'integer', 'min:0'],
+    //     ]);
+
+    //     $certificate->update([
+    //         'status_verifikasi' => $validated['status_verifikasi'],
+    //         'poin' => $validated['poin'] ?? 0,
+    //     ]);
+
+    //     return back()->with('success', 'Verifikasi sertifikat berhasil disimpan.');
+    // }
+
     public function verifyCertificate(Request $request, Certificate $certificate)
     {
         $validated = $request->validate([
@@ -54,10 +70,23 @@ class DocumentVerificationController extends Controller
             'poin' => ['nullable', 'integer', 'min:0'],
         ]);
 
-        $certificate->update([
-            'status_verifikasi' => $validated['status_verifikasi'],
-            'poin' => $validated['poin'] ?? 0,
-        ]);
+        DB::transaction(function () use ($certificate, $validated) {
+            // 1. Update sertifikat yang sedang diverifikasi
+            $certificate->update([
+                'status_verifikasi' => $validated['status_verifikasi'],
+                'poin' => $validated['poin'] ?? 0,
+            ]);
+
+            // 2. Hitung total poin semua sertifikat milik student
+            //    Jika hanya sertifikat yang verified yang dihitung, lihat opsi di bawah
+            $totalPoin = Certificate::where('student_id', $certificate->student_id)
+                ->sum('poin');
+
+            // 3. Update total poin ke tabel students
+            $certificate->student()->update([
+                'poin_sertifikat' => $totalPoin,
+            ]);
+        });
 
         return back()->with('success', 'Verifikasi sertifikat berhasil disimpan.');
     }
