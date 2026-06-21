@@ -20,6 +20,7 @@ class DocumentVerificationController extends Controller
 
     public function show(Student $student)
     {
+        // dd($student);
         return view(
             'admin.document-verifications.show',
             compact('student')

@@ -172,10 +172,10 @@
                         📄 Akta Kelahiran
                     </h4>
 
-                    @if($student->document?->akta_lahir)
+                    @if($student->document?->akta)
 
                     <a
-                        href="{{ asset('storage/' . $student->document->akta_lahir) }}"
+                        href="{{ asset('storage/' . $student->document->akta) }}"
                         target="_blank"
                         class="inline-block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg">
                         Lihat Dokumen
