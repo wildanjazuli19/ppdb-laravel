@@ -12,7 +12,7 @@ class DocumentController extends Controller
     public function index()
     {
         // dd('index');
-        $student = Student::where('user_id', auth()->id())->first();
+        $student = Student::with('certificates')->where('user_id', auth()->id())->first();
         if (!$student) {
             return redirect()
                 ->route('student.registration') // ganti sesuai route form pendaftaran kamu

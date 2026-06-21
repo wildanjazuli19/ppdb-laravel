@@ -34,6 +34,7 @@ class Student extends Model
         'jarak_zonasi',
         'latitude',
         'longitude',
+        'nilai_rapor',
     ];
 
     protected $casts = [
@@ -65,5 +66,10 @@ class Student extends Model
     public function school()
     {
         return $this->belongsTo(School::class);
+    }
+
+    public function certificates()
+    {
+        return $this->hasMany(Certificate::class);
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\PrestasiController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ZonasiController;
+use App\Http\Controllers\Student\CertificateController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboard;
 use App\Http\Controllers\Student\RegistrationController;
 
@@ -144,6 +145,10 @@ Route::middleware(['auth', 'student'])
             DocumentController::class,
             'store'
         ])->name('documents.store');
+
+        Route::post('/certificate/{student}', [CertificateController::class, 'store'])->name('certificate.store');
+        Route::put('/certificate/{certificate}', [CertificateController::class, 'update'])->name('certificate.update');
+        Route::delete('/certificate/{certificate}', [CertificateController::class, 'destroy'])->name('certificate.destroy');
     });
 
 // Route::get(

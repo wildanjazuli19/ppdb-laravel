@@ -6,12 +6,6 @@
 
 @section('content')
 
-@if(session('success'))
-<div class="mb-6 p-4 rounded-xl bg-green-500/20 text-green-400">
-    {{ session('success') }}
-</div>
-@endif
-
 <div class="flex justify-end mb-6">
 
     <form method="POST"

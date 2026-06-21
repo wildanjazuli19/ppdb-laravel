@@ -46,6 +46,8 @@ class RegistrationController extends Controller
             'jenis_kelamin' => 'required',
         ]);
 
+        $data['school_id'] = null;
+
         if ($request->jalur === 'zonasi') {
             $data['school_id'] = 1;
             $school = School::findOrFail(1);
@@ -61,10 +63,17 @@ class RegistrationController extends Controller
             $data['longitude'] = $request->longitude;
         }
 
+        if ($request->jalur === 'prestasi') {
+            $data['nilai_rapor'] = $request->nilai_rapor;
+            $data['school_id'] = 1;
+            // dd($data);
+            // $data['poin_sertifikat'] = $request->poin_sertifikat;
+            // $data['nilai_prestasi'] = $request->nilai_prestasi;
+        }
+
         $data['user_id'] = auth()->id();
         $data['nomor_pendaftaran'] = $request->nomor_pendaftaran;
         $data['status'] = 'pending';
-        $data['school_id'] = $data['jalur'] === 'zonasi' ? 1 : null;
 
         Student::create($data);
 

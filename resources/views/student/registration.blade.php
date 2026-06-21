@@ -290,6 +290,32 @@
                 @enderror
             </div>
 
+            <div id="nilai_rapor_container"
+                class="{{ old('jalur', $student->jalur ?? '') === 'prestasi' ? '' : 'hidden' }}">
+
+                <label for="nilai_rapor"
+                    class="block mb-2 text-sm font-medium">
+                    Nilai Rapor
+                </label>
+
+                <input
+                    type="number"
+                    id="nilai_rapor"
+                    name="nilai_rapor"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    value="{{ old('nilai_rapor', $student->nilai_rapor ?? '') }}"
+                    placeholder="Contoh: 88.75"
+                    class="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:border-blue-500 focus:outline-none @error('nilai_rapor') border-red-500 @enderror">
+
+                @error('nilai_rapor')
+                <p class="text-red-400 text-sm mt-2">
+                    {{ $message }}
+                </p>
+                @enderror
+            </div>
+
             <div>
                 <label for="alamat"
                     class="block mb-2 text-sm font-medium">
@@ -409,5 +435,27 @@
             }
         );
     });
+</script>
+
+<script>
+    const jalur = document.getElementById('jalur');
+    const nilaiRaporContainer = document.getElementById('nilai_rapor_container');
+    const nilaiRapor = document.getElementById('nilai_rapor');
+
+    function toggleNilaiRapor() {
+        if (jalur.value === 'prestasi') {
+            nilaiRaporContainer.classList.remove('hidden');
+            nilaiRapor.required = true;
+        } else {
+            nilaiRaporContainer.classList.add('hidden');
+            nilaiRapor.required = false;
+            nilaiRapor.value = '';
+        }
+    }
+
+    jalur.addEventListener('change', toggleNilaiRapor);
+
+    // Jalankan saat halaman dimuat
+    toggleNilaiRapor();
 </script>
 @endpush
