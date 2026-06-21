@@ -13,6 +13,11 @@ class DocumentController extends Controller
     {
         // dd('index');
         $student = Student::where('user_id', auth()->id())->first();
+        if (!$student) {
+            return redirect()
+                ->route('student.registration') // ganti sesuai route form pendaftaran kamu
+                ->with('error', 'Silakan lengkapi data pendaftaran terlebih dahulu');
+        }
         $document = Document::where('student_id', $student->id)->first();
         // dd($document);
 
