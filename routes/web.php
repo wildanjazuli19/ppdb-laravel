@@ -130,6 +130,11 @@ Route::middleware(['auth', 'student'])
             'store'
         ])->name('registration.store');
 
+        Route::put('/registration', [
+            RegistrationController::class,
+            'update'
+        ])->name('registration.update');
+
         Route::get('/documents', [
             StudentDashboard::class,
             'index'

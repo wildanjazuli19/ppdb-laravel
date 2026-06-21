@@ -10,7 +10,7 @@
 
             <div>
                 <h3 class="text-2xl font-bold">
-                    Form Tambah Siswa
+                    Formulir Pendaftaran PPDB
                 </h3>
 
                 <p class="text-slate-400 mt-1">
@@ -19,6 +19,31 @@
             </div>
 
         </div>
+        {{-- Flash Message --}}
+        @if (session('success'))
+        <div class="mb-6 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-emerald-300">
+            <div class="font-semibold">Berhasil</div>
+            <div class="text-sm mt-1">{{ session('success') }}</div>
+        </div>
+        @endif
+
+        @if (session('error'))
+        <div class="mb-6 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-red-300">
+            <div class="font-semibold">Gagal</div>
+            <div class="text-sm mt-1">{{ session('error') }}</div>
+        </div>
+        @endif
+
+        @if ($errors->any())
+        <div class="mb-6 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-red-300">
+            <div class="font-semibold mb-2">Terjadi kesalahan pada input:</div>
+            <ul class="list-disc list-inside text-sm space-y-1">
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
         <form action="{{ $action }}"
             method="POST"
@@ -107,7 +132,7 @@
                         type="text"
                         id="nomor_pendaftaran"
                         name="nomor_pendaftaran"
-                        value="{{ old('nomor_pendaftaran', $student->nomor_pendaftaran ?? '') }}"
+                        value="{{ old('nomor_pendaftaran', isset($student) && $student->nomor_pendaftaran ? $student->nomor_pendaftaran : \App\Services\RegistrationNumberService::generate()) }}"
                         placeholder="PPDB-2026-0001"
                         class="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 focus:border-blue-500 focus:outline-none @error('nomor_pendaftaran') border-red-500 @enderror">
 
