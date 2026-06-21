@@ -45,6 +45,8 @@ class ZonasiController extends Controller
                 ->orderBy('jarak_zonasi')
                 ->get();
 
+            // dd($ranked);
+
             foreach ($ranked as $index => $student) {
 
                 $student->update([
