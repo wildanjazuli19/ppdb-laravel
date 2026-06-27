@@ -152,6 +152,9 @@ Route::middleware(['auth', 'student'])
         Route::post('/certificate/{student}', [CertificateController::class, 'store'])->name('certificate.store');
         Route::put('/certificate/{certificate}', [CertificateController::class, 'update'])->name('certificate.update');
         Route::delete('/certificate/{certificate}', [CertificateController::class, 'destroy'])->name('certificate.destroy');
+
+        Route::get('/registration/print', [RegistrationController::class, 'print'])
+            ->name('registration.print');
     });
 
 // Route::get(

@@ -189,7 +189,7 @@
 
                     </a>
 
-                    <a href="#"
+                    <a href="{{ route('student.documents') }}"
                         class="rounded-xl bg-slate-700 p-5 hover:bg-blue-600 transition">
 
                         📄
@@ -202,7 +202,7 @@
 
                     </a>
 
-                    <a href="#"
+                    <a href="{{ route('student.registration.print') }}"
                         class="rounded-xl bg-slate-700 p-5 hover:bg-blue-600 transition">
 
                         🖨

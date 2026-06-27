@@ -108,4 +108,13 @@ class RegistrationController extends Controller
             ->route('student.registration')
             ->with('success', 'Data pendaftaran berhasil diperbarui.');
     }
+
+    public function print()
+    {
+        $student = Student::where('user_id', auth()->id())
+            ->with('school')
+            ->firstOrFail();
+
+        return view('student.print', compact('student'));
+    }
 }
