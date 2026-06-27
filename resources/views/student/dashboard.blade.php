@@ -215,18 +215,115 @@
 
                     </a>
 
-                    <a href="#"
-                        class="rounded-xl bg-slate-700 p-5 hover:bg-blue-600 transition">
+                    <div class="rounded-3xl bg-slate-800 border border-slate-700 shadow-lg">
 
-                        📢
+                        <div class="flex items-center justify-between border-b border-slate-700 px-8 py-6">
 
-                        <h4 class="mt-3 font-semibold">
+                            <div>
 
-                            Pengumuman
+                                <h2 class="text-2xl font-bold">
 
-                        </h4>
+                                    📢 Pengumuman Terbaru
 
-                    </a>
+                                </h2>
+
+                                <p class="text-slate-400 mt-1">
+
+                                    Informasi terbaru dari Panitia PPDB
+
+                                </p>
+
+                            </div>
+
+                            <a href="{{ route('student.announcement.index') }}"
+                                class="rounded-xl bg-blue-600 px-5 py-2 hover:bg-blue-700">
+
+                                Lihat Semua
+
+                            </a>
+
+                        </div>
+
+                        <div class="divide-y divide-slate-700">
+
+                            @forelse($announcements as $announcement)
+
+                            <a href="{{ route('student.announcement.show',$announcement->id) }}"
+                                class="block p-6 hover:bg-slate-700 transition">
+
+                                <div class="flex justify-between items-start">
+
+                                    <div class="flex-1">
+
+                                        <h3 class="text-xl font-semibold">
+
+                                            {{ $announcement->judul }}
+
+                                        </h3>
+
+                                        <p class="mt-3 text-slate-300">
+
+                                            {{ \Illuminate\Support\Str::limit(strip_tags($announcement->isi),150) }}
+
+                                        </p>
+
+                                        <div class="mt-4 flex items-center gap-4 text-sm text-slate-400">
+
+                                            <span>
+
+                                                📅
+                                                {{ $announcement->tanggal_publish->translatedFormat('d F Y') }}
+
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="ml-6">
+
+                                        <span
+                                            class="rounded-full bg-blue-600 px-4 py-2 text-sm">
+
+                                            Baca →
+
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </a>
+
+                            @empty
+
+                            <div class="py-16 text-center">
+
+                                <div class="text-6xl">
+
+                                    📭
+
+                                </div>
+
+                                <h3 class="mt-4 text-xl font-semibold">
+
+                                    Belum Ada Pengumuman
+
+                                </h3>
+
+                                <p class="mt-2 text-slate-400">
+
+                                    Pengumuman dari panitia akan muncul di sini.
+
+                                </p>
+
+                            </div>
+
+                            @endforelse
+
+                        </div>
+
+                    </div>
 
                 </div>
 

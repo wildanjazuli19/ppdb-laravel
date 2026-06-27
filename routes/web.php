@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\PrestasiController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ZonasiController;
+use App\Http\Controllers\Student\AnnouncementController as StudentAnnouncementController;
 use App\Http\Controllers\Student\CertificateController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboard;
 use App\Http\Controllers\Student\RegistrationController;
@@ -155,6 +156,12 @@ Route::middleware(['auth', 'student'])
 
         Route::get('/registration/print', [RegistrationController::class, 'print'])
             ->name('registration.print');
+
+        Route::get('/announcements', [StudentAnnouncementController::class, 'index'])
+            ->name('announcement.index');
+
+        Route::get('/announcements/{announcement}', [StudentAnnouncementController::class, 'show'])
+            ->name('announcement.show');
     });
 
 // Route::get(
