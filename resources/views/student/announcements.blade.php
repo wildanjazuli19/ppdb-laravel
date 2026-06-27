@@ -35,23 +35,12 @@
         <div
             class="overflow-hidden rounded-2xl border border-slate-700 bg-slate-800 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl">
 
-            <img
-                src="{{ asset($announcement->image) }}"
-                class="h-56 w-full object-cover">
-
             <div class="p-6">
-
-                <span
-                    class="rounded-full bg-blue-600 px-3 py-1 text-xs font-semibold">
-
-                    {{ $announcement->category }}
-
-                </span>
 
                 <h2
                     class="mt-4 text-2xl font-bold">
 
-                    {{ $announcement->title }}
+                    {{ $announcement->judul }}
 
                 </h2>
 
@@ -65,12 +54,12 @@
                 <p
                     class="mt-5 text-slate-300">
 
-                    {{ Str::limit(strip_tags($announcement->content),150) }}
+                    {{ Str::limit(strip_tags($announcement->isi),150) }}
 
                 </p>
 
                 <a
-                    href="{{ route('student.announcement.show',$announcement->slug) }}"
+                    href="{{ route('student.announcement.show',$announcement->id) }}"
                     class="mt-6 inline-flex rounded-xl bg-blue-600 px-5 py-3 font-semibold hover:bg-blue-700">
 
                     Baca Selengkapnya →

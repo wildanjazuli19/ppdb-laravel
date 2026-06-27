@@ -21,7 +21,7 @@ class AnnouncementController extends Controller
 
     public function show(Announcement $announcement)
     {
-        abort_if(!$announcement->status, 404);
+        // abort_if(!$announcement->status, 404);
 
         return view('student.announcement.show', compact('announcement'));
     }
